@@ -2,7 +2,7 @@ import math as m
 
 class Triangle:
     # из прошлого занаятия
-    def __init__(self, a, b, c) -> None:
+    def __init__(self, a: int|float, b: int|float, c: int|float) -> None:
         if a <= 0 and b <= 0 and c <= 0:
             raise ValueError('<0')
         if a+b<=c or b+c<=a or c+a<=b:
@@ -23,7 +23,7 @@ class Triangle:
         return (p*(p-self.a)*(p-self.b)*(p-self.c))**0.5
 
     # является ли равносторонним
-    def is_equilateral(self, eps=0.0001):
+    def is_equilateral(self, eps=0.0001) -> bool:
         return abs(self.a-self.b)<=eps and abs(self.b-self.c)<=eps
         
     # задание 1
@@ -65,10 +65,23 @@ class Triangle:
         return False
 
     def triangel_type(self) -> str:
-        p: float = self.perimeter()
-        s: float = self.area()
         angles: tuple[float] = self.angles()
+        a_type = ''
         if self.is_equilateral():
+            a_type = 'равносторонний'
+        else:
+            if self.is_right():
+                a_type = 'прямоугольный'
+            elif self.is_acute():
+                a_type = 'острый'
+            elif self.is_obtuse():
+                a_type = 'тупой'
+        s_type = ''
+        if self.is_isoscele():
+            s_type = ', равнобедренный'
+        ang = self.angles()
+        return f'Углы {ang[0], ang[1], ang[2]}, {a_type}{s_type}'
 
-            pass
-        pass
+t = Triangle(3,4,4)
+print(t)
+print(t.triangel_type())
