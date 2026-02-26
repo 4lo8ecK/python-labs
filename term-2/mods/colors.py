@@ -41,4 +41,5 @@ def style(*args: int) -> str:
     res += 'm'
     return res
 
-print(f"{style(bold, red)}test{style(0)}")
+if __name__ == "__main__":
+    print(f"{style(bold, red)}test{style(0)}")

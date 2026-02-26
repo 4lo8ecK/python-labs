@@ -103,7 +103,11 @@ def tsk2() -> None:
     cmd: str = input("Введите значение: ")
     print(f"Введёное вами значение: {cmd}")
 
-tsks = [tsk1, tsk2]
 
-app: ui = ui(12, "Просто подзаголовок", tsks)
-app.exec()
+
+if __name__ == "__main__":
+
+    tsks = [tsk1, tsk2]
+
+    app: ui = ui(12, "Просто подзаголовок", tsks)
+    app.exec()
