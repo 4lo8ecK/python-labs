@@ -29,7 +29,7 @@ class MovieCollection:
         return f"Полный список фильмов:\n{res}"
 
     def new_movie(self, mov: Movie = None) -> None:
-        if (mov != None) or (mov in self.__lib):
+        if (mov != None) or not(mov in self.__lib):
             self.__lib += [mov]
     
     def remove_movie(self, mov: Movie = None) -> None:
