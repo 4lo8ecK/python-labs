@@ -52,23 +52,29 @@ class Rectangle:
     @staticmethod
     def intersection(a: Rectangle, b: Rectangle) -> Rectangle:
         if Rectangle.do_intersect(a,b):
+            wid = max(a.width, b.width) - min(a.width, b.width)
+            hght = max(a.height, b.height) - min(a.height, a.width)
             
-            pass
+            x = max(a.x, b.x) - min(a.x, b.x)
+            y = max(a.y, b.y) - min(a.y, b.y)
+
+            return Rectangle(x=x, y=y, width=wid, height=hght)
         pass
 
 # int main() :)
 if __name__ == "__main__":
 
     r = Rectangle()
-    r1 = Rectangle(width=2, height=5, x=1, y=3)
+    # r1 = Rectangle(width=2, height=5, x=1, y=3)
     r2 = Rectangle(2, 5, 1, 3)
     
-    # print(f"r:\n{r}\n")
+    print(f"r:\n{r}\n")
     # print(f"r1:\n{r1}\n")
-    # print(f"r2:\n{r2}\n")
+    print(f"r2:\n{r2}\n")
 
-    # print(Rectangle.do_intersect(r2, r))
-    print(Rectangle.new_by_two(r, r2))
+    print("Пересечение: ", Rectangle.do_intersect(r, r2))
+    # print(Rectangle.new_by_two(r, r2))
+    print(Rectangle.intersection(r, r2))
 
     pass
 
