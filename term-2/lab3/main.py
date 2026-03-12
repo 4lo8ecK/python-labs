@@ -1,67 +1,74 @@
 
 class Rectangle:
     def __init__(self,
-        x_len: int|float = 1, y_len: int|float = 1,
-        x_loc: int|float = 0, y_loc: int|float = 0) -> None:
+        x: int|float = 0, y: int|float = 0,
+        width: int|float = 1, height: int|float = 1
+        ) -> None:
         
         """
         Подразумевается, что по умолчанию прямоугольник единичный
         и находится в координатах (0;0)
         Координатой прямоугольника является левый нижний угол
         """
-        if x_len < 0 or y_len < 0: raise ValueError("Длина стороны должна быть больше нуля")
+        if width < 0 or height < 0: raise ValueError("Длина стороны должна быть больше нуля")
 
-        self.__x_loc = x_loc
-        self.__y_loc = y_loc
+        self.x = x
+        self.y = y
     
-        self.__x_len = x_len
-        self.__y_len = y_len
+        self.width = width
+        self.height = height
 
-        self.__up_right_x = self.__x_loc + self.__x_len
-        self.__up_right_y = self.__y_loc + self.__y_len
+        self.x1 = self.x + self.width
+        self.y1 = self.y + self.height
 
     def __str__(self) -> str:
-        return f"Координаты:\t({self.__x_loc}, {self.__y_loc})\nРазмеры:\t({self.__x_len}, {self.__y_len})"
+        return f"Координаты:\t({self.x}, {self.y})\nРазмеры:\t({self.width}, {self.height})"
 
     def mov(self, new_x: int|float = None, new_y: int|float = None) -> None:
-        if new_x != None: self.__x_loc = new_x
-        if new_y != None: self.__y_loc = new_y
+        if new_x != None: self.x = new_x
+        if new_y != None: self.y = new_y
         
     
     def resize(self, new_x: int|float = None, new_y: int|float = None) -> None:
-        if new_x != None: self.__x_len = new_x
-        if new_y != None: self.__y_len = new_y
+        if new_x != None: self.width = new_x
+        if new_y != None: self.height = new_y
 
     @staticmethod
-    def _intersect(a: Rectangle, b: Rectangle) -> bool:
-        return max(a.__up_right_x, b.__up_right_x) < min(a.__up_right_x, b.__up_right_x) and max(a.__up_right_y, b.__up_right_y) < min(a.__up_right_y, b.__up_right_y)
+    def do_intersect(a: Rectangle, b: Rectangle) -> bool:
+        return (min(a.x1, b.x1) <= max(a.x1, b.x1)) and (min(a.y1, b.y1) <= max(a.y1, b.y1))
 
+        
     @staticmethod
     def new_by_two(a: Rectangle, b: Rectangle) -> Rectangle:
-        new_x_loc = min(a.__x_loc, b.__x_loc)
-        new_y_loc = min(a.__y_loc, b.__y_loc)
 
-        new_x_len = (a.__x_loc + b.__x_loc) - min(a.__x_loc, b.__x_loc)
-        new_y_len = (a.__y_loc + b.__y_loc) - min(a.__y_loc, b.__y_loc)
+        new_x = min(a.x, b.x)
+        new_y = min(a.y, b.y)
 
-        return Rectangle(x_len=new_x_len, y_len=new_y_len, x_loc=new_x_loc, y_loc=new_y_loc)
-        pass
+        new_width = max(a.x1, b.x1) - min(a.x, b.x)
+        new_height = max(a.y1, b.y1) - min(a.y, b.y)
+
+        return Rectangle(width=new_width, height=new_height, x=new_x, y=new_y)
 
     @staticmethod
     def intersection(a: Rectangle, b: Rectangle) -> Rectangle:
-
+        if Rectangle.do_intersect(a,b):
+            
+            pass
         pass
-
-    pass
 
 # int main() :)
 if __name__ == "__main__":
-    r = Rectangle()
-    r1 = Rectangle(2, 5, 1, 3)
-    # print(r)
-    # print(r1)
 
-    r3 = Rectangle.new_by_two(r, r1)
-    print(r3)
+    r = Rectangle()
+    r1 = Rectangle(width=2, height=5, x=1, y=3)
+    r2 = Rectangle(2, 5, 1, 3)
     
+    # print(f"r:\n{r}\n")
+    # print(f"r1:\n{r1}\n")
+    # print(f"r2:\n{r2}\n")
+
+    # print(Rectangle.do_intersect(r2, r))
+    print(Rectangle.new_by_two(r, r2))
+
     pass
+
