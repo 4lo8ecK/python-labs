@@ -17,6 +17,9 @@ class Rectangle:
         self.__x_len = x_len
         self.__y_len = y_len
 
+        self.__up_right_x = self.__x_loc + self.__x_len
+        self.__up_right_y = self.__y_loc + self.__y_len
+
     def __str__(self) -> str:
         return f"Координаты:\t({self.__x_loc}, {self.__y_loc})\nРазмеры:\t({self.__x_len}, {self.__y_len})"
 
@@ -28,6 +31,10 @@ class Rectangle:
     def resize(self, new_x: int|float = None, new_y: int|float = None) -> None:
         if new_x != None: self.__x_len = new_x
         if new_y != None: self.__y_len = new_y
+
+    @staticmethod
+    def _intersect(a: Rectangle, b: Rectangle) -> bool:
+        return max(a.__up_right_x, b.__up_right_x) < min(a.__up_right_x, b.__up_right_x) and max(a.__up_right_y, b.__up_right_y) < min(a.__up_right_y, b.__up_right_y)
 
     @staticmethod
     def new_by_two(a: Rectangle, b: Rectangle) -> Rectangle:
