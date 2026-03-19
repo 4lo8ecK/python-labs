@@ -59,14 +59,14 @@ class Rectangle:
             y = max(a.y, b.y) - min(a.y, b.y)
 
             return Rectangle(x=x, y=y, width=wid, height=hght)
-        pass
+        else: return None
 
 # int main() :)
 if __name__ == "__main__":
 
     r = Rectangle()
     # r1 = Rectangle(width=2, height=5, x=1, y=3)
-    r2 = Rectangle(2, 5, 1, 3)
+    r2 = Rectangle(2, 5, 2, 3)
     
     print(f"r:\n{r}\n")
     # print(f"r1:\n{r1}\n")
