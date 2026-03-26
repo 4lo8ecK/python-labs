@@ -1,5 +1,6 @@
 import os
 from student import Student
+import colors as col
 
 DBG = True
 CSV_SEP = ';'
@@ -40,12 +41,17 @@ class App:
         to_csv = App.tuple_to_csv_line
         for i in range(lines_count):
             self.writeln(to_csv(Student.get_random().to_tuple()))
+        if DBG: print('Сгенерированы случайные данные')
 
     def get_file_handler(self):
         return self.__file_handle
 
 if __name__ == '__main__':
-    DBG = False
+    cmd = input('Показывать отладочную информацию? (y/N): ')
+    if cmd == 'y' or cmd == 'Y' or cmd == 'Н' or cmd == 'н':
+        DBG = True
+    else:
+        DBG = False
 
     app = App()
 
@@ -63,7 +69,8 @@ if __name__ == '__main__':
     found_students = open(os.path.join(App.APP_FILES_DIR, 'found.csv'), 'w', encoding='utf-8')
 
     for i in stud_list:
-        if DBG: print(i)
+        # if DBG: print(i)
         found_students.write(str(i) + '\n')
-        
+    if DBG: print('Полученные результаты записаны в файл \'files/found.csv\'')
+
     found_students.close()
