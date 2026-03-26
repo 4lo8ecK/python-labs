@@ -1,6 +1,5 @@
 import os
 from student import Student
-import colors as col
 
 DBG = True
 CSV_SEP = ';'
