@@ -17,20 +17,24 @@ class Student:
         grant: int = None, address: str = None, marital_status: str = None
         ) -> None:
 
-        if not(isinstance(grade_id, int)):
-            raise ValueError('grade_id принимает значения типа int')
+        if isinstance(grade_id, str):
+            grade_id = int(grade_id)
+        elif not(isinstance(grade_id, int)):
+            raise ValueError('grade_id принимает значения типа int, а на вход даётся', type(grade_id))
 
         if not(isinstance(surname, str)):
-            raise ValueError('surname принимает значения типа str')
+            raise ValueError('surname принимает значения типа str, а на вход даётся', type(surname))
 
-        if not(isinstance(grant, int)):
-            raise ValueError('grant принимает значения типа int')
-        
+        if isinstance(grant, str):
+            grant = int(grant)
+        elif not(isinstance(grant, int)):
+            raise ValueError('grant принимает значения типа int, а на вход даётся', type(grant))
+
         if not(isinstance(address, str)):
-            raise ValueError('address принимает значения типа str')
+            raise ValueError('address принимает значения типа str, а на вход даётся', type(address))
         
         if not(isinstance(marital_status, str)):
-            raise ValueError('marital_status принимает значения типа str')
+            raise ValueError('marital_status принимает значения типа str, а на вход даётся', type(marital_status))
         
         self.grade_id: int = grade_id
         self.surname: str = surname
@@ -43,6 +47,10 @@ class Student:
 
     def to_tuple(self) -> tuple:
         return (self.grade_id, self.surname, self.grant, self.address, self.marital_status)
+
+    @staticmethod
+    def rnd_seed() -> None:
+        rnd.seed(int(tm.time()*1000))
 
     @staticmethod
     def __get_random_elem(lst: list = None):
@@ -66,7 +74,6 @@ class Student:
             rand(StConst.MARITAL_STATUS))
 
 if __name__ == "__main__":
-    rnd.seed(int(tm.time()*1000))
     a = Student.get_random().to_tuple()
     
     for i in a:
