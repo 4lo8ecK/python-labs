@@ -1,12 +1,11 @@
 # region impports
-import os
 import random as rnd
 import sqlite3
 # endregion
 
-DBG = False
-
 # region constants
+DBG = False
+CLS = '\x1bc'
 NAMES_BANK = ['Глеб', 'Рома', 'Дима', 'Илья']
 SNAMES_BANK = ['Иванов', 'Петров', 'Васильев', 'Кузнецов',]
 VACANCIES = ['Игрок в Brawl Stars', 'Программист на Brainfuck', 'Программист на C++', 'Программист на Python', '3D аниматор в Autodesk Maya', '3D моделлер в Autodesk 3DsMax']
@@ -18,8 +17,7 @@ def get_rnd(lst: list):
     return lst[rnd.randint(0, len(lst)-1)]
 #endregion
 
-# region main part
-
+# region Lab8 class definition
 class Lab8:
     def __init__(self):
         if DBG: print("\x1b[0;1;31m=== CALLED CLASS INIT ===\x1b[0m")
@@ -96,11 +94,17 @@ class Lab8:
         GROUP BY vacancy.id;""")
         for row in self.cur.fetchall():
             print(f"\x1b[0;32m{row[0]}\x1b[0m: \x1b[0;33m{row[1]}\x1b[0")
+#endregion
 
-app = Lab8()
-print("\n\ttask1\n")
-app.task1()
-print("\n\ttask2\n")
-app.task2(1)
-print("\n\ttask3\n")
-app.task3()
+# region int main() // :P
+if __name__ == "__main__":
+    print(CLS, "\n\t\x1b[0;1;33;21m== Лабораторная работа №8 ==\x1b[0m\n")
+    app = Lab8()
+    print("\n\tЗадание 1\n")
+    app.task1()
+    print("\n\tЗадание 2\n")
+    app.task2(1)
+    print("\n\tЗадание 3\n")
+    app.task3()
+
+# endregion
