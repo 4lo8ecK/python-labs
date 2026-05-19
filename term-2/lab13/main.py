@@ -152,6 +152,7 @@ class Task5(Task4):
     def exec(self) -> None:
         with zipfile.ZipFile(os.path.join(self.TASK5_DIR, f"{self.TEXT_FILE}.zip"), mode='w', compression=zipfile.ZIP_DEFLATED) as arc:
             arc.write(self.TEXT_FILE)
+            arc.comment = ("Резервная копия от сцены, где пришли арестовывать самого обычного кота").encode('ansi')
         
 
 if __name__ == "__main__":
