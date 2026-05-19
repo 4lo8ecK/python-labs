@@ -4,8 +4,8 @@ from tkinter import ttk
 MAIN_FONT = "Segoe UI"
 
 class Lab9:
-    def __init__(self, root: tk.Tk = None) -> None:
-        self.rt = root
+    def __init__(self) -> None:
+        self.rt = tk.Tk()
         self.rt.title("Lab9")
         
         self.width = 30
@@ -18,15 +18,16 @@ class Lab9:
         self.__init_buttons()
 
         self.update_display()
+        self.rt.mainloop()
 
     def __init_text(self) -> None:
-        self.text_frame = tk.Frame(root)
+        self.text_frame = tk.Frame(self.rt)
         self.text_frame.pack(expand=True, fill='both', pady=10)
 
         self.text_area = tk.Text(self.text_frame, width=self.width, height=self.height, font=(MAIN_FONT, 14))
         self.text_area.pack()
         
-        self.ctrl_frame = tk.Frame(root)
+        self.ctrl_frame = tk.Frame(self.rt)
         self.ctrl_frame.pack(pady=10)
 
         tk.Label(self.ctrl_frame, text="Шаг:").grid(row=0, column=0)
@@ -47,7 +48,7 @@ class Lab9:
         self.btn_down.grid(row=1, column=3)
         self.btn_right.grid(row=1, column=4)
 
-        ttk.Button(root, text="Close", command=root.destroy).pack(pady=5) 
+        ttk.Button(self.rt, text="Close", command=self.rt.destroy).pack(pady=5) 
 
     def resize(self, x, y) -> None:
         step = int(self.step_comb.get())
@@ -86,6 +87,4 @@ class Lab9:
 
 # int main() // :P
 if __name__ == "__main__":
-    root = tk.Tk()
-    app = Lab9(root)
-    root.mainloop()
+    app = Lab9()
