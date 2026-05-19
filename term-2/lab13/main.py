@@ -3,8 +3,11 @@
 import sys
 
 import os
+
 import shutil
 from pathlib import Path as pt
+
+import zipfile
 
 import random as rnd
 import time
@@ -129,14 +132,56 @@ class Task3(Task2):
 
 class Task4(Task3):
 
+    def exec(self) -> None:
+        dirs = self.get_dirs_list('./')
+        for i in dirs:
+            if len(self.get_files_list(i)) > 10:
+                print(i)
 
-    pass
+class Task5(Task4):
+    TEXT_FILE = 'text.txt'
+    TASK5_DIR = 'task5'
 
+    @staticmethod
+    def free() -> None:
+        Task5.rm_rf(Task5.TASK5_DIR)
+
+    def __init__(self) -> None:
+        self.mkdir(self.TASK5_DIR)
+
+    def exec(self) -> None:
+        with zipfile.ZipFile(os.path.join(self.TASK5_DIR, f"{self.TEXT_FILE}.zip"), mode='w', compression=zipfile.ZIP_DEFLATED) as arc:
+            arc.write(self.TEXT_FILE)
+        
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        if sys.argv[1] == 'free':
-            Task1.free()
-            Task2.free()
-            Task3.free()
-            sys.exit(0)
+    if len(sys.argv) <= 1:
+        sys.exit(0)
+    arg = sys.argv[1]
+    if arg == 'free':
+        Task1.free()
+        Task2.free()
+        Task3.free()
+        Task4.free()
+        Task5.free()
+        sys.exit(0)
+
+    elif arg == '1':
+        t = Task1()
+        t.exec()
+
+    elif arg == '2':
+        t = Task2()
+        t.exec()
+
+    elif arg == '3':
+        t = Task3()
+        t.exec()
+
+    elif arg == '4':
+        Task4.free()
+        t = Task4()
+        t.exec()
+    elif arg == '5':
+        t = Task5()
+        t.exec()
